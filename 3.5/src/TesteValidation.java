@@ -60,7 +60,18 @@ public class TesteValidation {
 				infoData.setLatitudeOfStation(-15.6008);
 				infoData.setLongitudeOfStation(-47.7131);
 				infoData.setMonth(fileNames[i].substring(5, 7));
-				infoData.setYear("20" + fileNames[i].substring(3, 5));												
+				infoData.setYear("20" + fileNames[i].substring(3, 5));
+			 else if (fileNames[i].substring(0, 3).equals("CPA")) {
+			    infoData.setId("13");
+				infoData.setInputData(file.getAbsolutePath());
+				infoData.setOutputData(file.getAbsolutePath());
+				infoData.setOutputCode(fileNames[i].substring(0, 9) + "_DQC.csv");
+				infoData.setOutputReport(fileNames[i].substring(0, 7) + ".csv");
+				infoData.setStation("Cachoeira Paulista");
+				infoData.setLatitudeOfStation(-22.6896);
+				infoData.setLongitudeOfStation(-45.0062);
+				infoData.setMonth(fileNames[i].substring(5, 7));
+				infoData.setYear("20" + fileNames[i].substring(3, 5));		
 			} else if (fileNames[i].substring(0, 3).equals("CAI")) {
 				infoData.setId("20");
 				infoData.setInputData(file.getAbsolutePath());
