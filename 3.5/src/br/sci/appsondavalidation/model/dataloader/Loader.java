@@ -300,7 +300,7 @@ public class Loader {
 					out.printf("%d;", code[i][4]);
 				else if (code[i][4] == 552)
 					out.printf("%d;", code[i][4]);
-				else if ((code[i][4] == 3333) || code[i][4] == -6999)
+				else if ((code[i][4] == 3333) || (code[i][4] == -6999))
 					out.print("N/A;");
 				else if (code[i][4] == -5555)
 					out.print("N/S;");
@@ -316,7 +316,7 @@ public class Loader {
 					out.printf("%d;", code[i][28]);
 				else if (code[i][28] == 552)
 					out.printf("%d;", code[i][28]);
-				else if ((code[i][28] == 3333) || code[i][28] == -6999)
+				else if ((code[i][28] == 3333) || (code[i][28] == -6999))
 					out.print("N/A;");
 				else if (code[i][28] == -5555)
 					out.print("N/S;");
@@ -332,7 +332,7 @@ public class Loader {
 					out.printf("%d;", code[i][8]);
 				else if (code[i][8] == 552)
 					out.printf("%d;", code[i][8]);
-				else if ((code[i][8] == 3333) || code[i][8] == -6999)
+				else if ((code[i][8] == 3333) || (code[i][8] == -6999))
 					out.print("N/A;");
 				else if (code[i][8] == -5555)
 					out.print("N/S;");
@@ -348,7 +348,7 @@ public class Loader {
 					out.printf("%d;", code[i][32]);
 				else if (code[i][32] == 552)
 					out.printf("%d;", code[i][32]);
-				else if ((code[i][32] == 3333) || code[i][32] == -6999)
+				else if ((code[i][32] == 3333) || (code[i][32] == -6999))
 					out.print("N/A;");
 				else if (code[i][32] == -5555)
 					out.print("N/S;");
@@ -364,7 +364,7 @@ public class Loader {
 					out.printf("%d;", code[i][12]);
 				else if (code[i][12] == 552)
 					out.printf("%d;", code[i][12]);
-				else if ((code[i][12] == 3333) || code[i][12] == -6999)
+				else if ((code[i][12] == 3333) || (code[i][12] == -6999))
 					out.print("N/A;");
 				else if (code[i][12] == -5555)
 					out.print("N/S;");
@@ -380,7 +380,7 @@ public class Loader {
 					out.printf("%d;", code[i][16]);
 				else if (code[i][16] == 552)
 					out.printf("%d;", code[i][16]);
-				else if ((code[i][16] == 3333) || code[i][16] == -6999)
+				else if ((code[i][16] == 3333) || (code[i][16] == -6999))
 					out.print("N/A;");
 				else if (code[i][16] == -5555)
 					out.print("N/S;");
