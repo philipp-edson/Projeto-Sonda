@@ -300,7 +300,7 @@ public class Loader {
 					out.printf("%d;", code[i][4]);
 				else if (code[i][4] == 552)
 					out.printf("%d;", code[i][4]);
-				else if ((code[i][4] == 3333) || code[i][4] == -6999)
+				else if ((code[i][4] == 3333) || (code[i][4] == -6999))
 					out.print("N/A;");
 				else if (code[i][4] == -5555)
 					out.print("N/S;");
@@ -380,7 +380,7 @@ public class Loader {
 					out.printf("%d;", code[i][16]);
 				else if (code[i][16] == 552)
 					out.printf("%d;", code[i][16]);
-				else if ((code[i][16] == 3333) && (code[i][16] == -6999))
+				else if ((code[i][16] == 3333) || (code[i][16] == -6999))
 					out.print("N/A;");
 				else if (code[i][16] == -5555)
 					out.print("N/S;");

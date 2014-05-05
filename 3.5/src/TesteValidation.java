@@ -61,7 +61,7 @@ public class TesteValidation {
 				infoData.setLongitudeOfStation(-47.7131);
 				infoData.setMonth(fileNames[i].substring(5, 7));
 				infoData.setYear("20" + fileNames[i].substring(3, 5));
-			 else if (fileNames[i].substring(0, 3).equals("CPA")) {
+			} else if (fileNames[i].substring(0, 3).equals("CPA")) {
 			    infoData.setId("13");
 				infoData.setInputData(file.getAbsolutePath());
 				infoData.setOutputData(file.getAbsolutePath());
