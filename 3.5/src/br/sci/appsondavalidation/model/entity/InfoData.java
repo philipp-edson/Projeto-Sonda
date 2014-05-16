@@ -20,7 +20,7 @@ public class InfoData {
 	private String station;
 	private String month;
 	private String year;
-		
+			
 	private Date dateOfValidation;
 	
 	private double latitudeOfStation;
@@ -126,7 +126,7 @@ public class InfoData {
 	public void setYear(String year) {
 		this.year = year;
 	}
-	
+		
 	@Override
 	public int hashCode() {
 		final int PRIME = 31;
