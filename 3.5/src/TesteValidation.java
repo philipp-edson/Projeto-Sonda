@@ -1,9 +1,7 @@
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
-
 import javax.swing.JOptionPane;
-
 import br.sci.appsondavalidation.model.controller.ScreeningController;
 import br.sci.appsondavalidation.model.dataloader.Loader;
 import br.sci.appsondavalidation.model.dataloader.exception.LoaderException;
@@ -64,8 +62,8 @@ public class TesteValidation {
 			} else if (fileNames[i].substring(0, 3).equals("CPA")) {
 			    infoData.setId("13");
 				infoData.setInputData(file.getAbsolutePath());
-				infoData.setOutputData(file.getAbsolutePath());
-				infoData.setOutputCode(fileNames[i].substring(0, 9) + "_DQC.csv");
+				infoData.setOutputData(fileNames[i].substring(0, 7) + "ED.csv");
+				infoData.setOutputCode(fileNames[i].substring(0, 7) + "_DQC.csv");
 				infoData.setOutputReport(fileNames[i].substring(0, 7) + ".csv");
 				infoData.setStation("Cachoeira Paulista");
 				infoData.setLatitudeOfStation(-22.6896);
@@ -272,11 +270,11 @@ public class TesteValidation {
 				infoData.setYear("20" + fileNames[i].substring(3, 5));
 			}
 			
-			ScreeningController controller = new ScreeningController(file.getAbsolutePath());
+			ScreeningController controller = new ScreeningController(file.getAbsolutePath(), file.getName());
 			
 			try {
 			 Loader loader = new Loader();
-			 loader.buildsMatrixData(file.getAbsolutePath());
+			 loader.buildsMatrixData(file.getAbsolutePath());			 			 
 			 loader.code = controller.validate(infoData.getLatitudeOfStation(), infoData.getLongitudeOfStation(), Integer.parseInt(infoData.getId()), Integer.parseInt(infoData.getMonth()));
 			 loader.writeData(infoData.getOutputData(), loader.data, infoData.getId());
 			 loader.writeCode(infoData.getOutputCode(), loader.data, loader.code, infoData.getId());

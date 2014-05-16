@@ -5,9 +5,16 @@ import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 import static java.lang.Math.acos;
 import static java.lang.Math.pow;
-//import static java.io.File.separator;
-
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.File;
+
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 
 import br.sci.appsondavalidation.model.dataloader.Loader;
 
@@ -126,12 +133,17 @@ public class ScreeningController {
     
     // Other variables
     private final double CDR = Math.PI / 180;
-    private int rows;           // total file lines 
+    private int rows;           // total file lines
+    public int cont =  0;       // Count rows number
     private double num;         // Measurement time in minutes
     private double dia_jul;     // Day number
     private double horacorr;    // Time correction considering longitude data for the measurement site
     private double div;         // Measurement time in decimal hours
+    private int i;
     public int cont_std = 0;
+    
+    private JProgressBar pb;
+    private JDialog dialog;
     
     // Variables used to count meteorological data valid - level 2 and 3 
     private int contTempValid = 0;
@@ -151,21 +163,44 @@ public class ScreeningController {
     private double kn;
     
     private Loader loader;
-    
+        
     public ScreeningController() {
     	super();
     }
     
-    public ScreeningController(String input) {
+    public ScreeningController(String input1, String input2) {
     	loader = new Loader();
-    	loader.buildsMatrixData(input);
-    	loader.buildsMatrixCode(input);
+    	loader.buildsMatrixData(input1);
+    	loader.buildsMatrixCode(input1);
+    	pb = new JProgressBar();
+    	dialog = new JDialog((JFrame)null, input2.toString());
     }
     
+    public void progressBar() {
+    	pb.setPreferredSize(new Dimension(500,50));
+    	//pb.setString("Working");
+    	pb.setStringPainted(true);
+    	pb.setMinimum(0);
+    	pb.setMaximum(rows);
+    	JLabel label = new JLabel("Validação: ");
+    	JPanel center_panel = new JPanel();
+    	center_panel.add(label);
+    	center_panel.add(pb);
+    	dialog.getContentPane().add(center_panel, BorderLayout.CENTER);
+    	Toolkit tk = Toolkit.getDefaultToolkit();  
+        Dimension d = tk.getScreenSize();
+    	dialog.setLocation((d.width/2)-315,(d.height/2)-75); // position by coordinates
+    	dialog.toFront(); // raise above other java windows
+    	dialog.pack();
+    	dialog.setVisible(true);
+    }
+        
     public int[][] validate(double latitude, double longitude, int station, int month) {
     	rows = loader.getRows() - 1;
-    	    	
-    	for (int i= 0; i<= rows; i++) {
+    	
+    	progressBar();
+    	
+    	for (i= 0; i<= rows; i++) {
     	    num = loader.data[i][3];
             div = num / 60;                             // Measurement time in utc time
             dia_jul = (int) loader.data[i][2];
@@ -479,7 +514,7 @@ public class ScreeningController {
             	if (loader.data[i][20] != -5555) {
             		TEMP_MX = loader.getTempMax("." + File.separator + "limits" + File.separator + "temp.max", station, month);
             		TEMP_MI = loader.getTempMin("." + File.separator + "limits" + File.separator + "temp.min", station, month);
-            		
+            		            		
             		if ((loader.data[i][20] > TEMP_MI) && (loader.data[i][20] < TEMP_MX)) {
             			loader.code[i][20] = 9;
             		} else {
@@ -712,7 +747,7 @@ public class ScreeningController {
     	} // End of loop level 1
     	
     	// Start level 2
-    	for (int i= 0; i<= rows; i++) {
+    	for (i= 0; i<= rows; i++) {
     	    num = loader.data[i][3];
             div = num / 60;
             dia_jul = (int) loader.data[i][2];
@@ -763,7 +798,7 @@ public class ScreeningController {
             	}
             	
             	if ((loader.data[i][4] > GLOBAL_MI) && (loader.data[i][4] < GLOBAL_MX)) {
-            		loader.code[i][4] = 999;
+            		loader.code[i][4] = 99;
             	} else {
             		loader.code[i][4] = 29;
             	}
@@ -1138,7 +1173,7 @@ public class ScreeningController {
     	} // End of loop level 2
     	
     	// Start level 3
-    	for (int i= 0; i<= rows; i++) {
+    	for (i= 0; i<= rows; i++) {
     		num = loader.data[i][3];
             div = num / 60;
             dia_jul = (int) loader.data[i][2];
@@ -1525,7 +1560,7 @@ public class ScreeningController {
          				////////////////////////  TEST BSRN LEVEL 3 ////////////////////////
          				if (sumSw > 50) {
          					if (zenith_angle < 75) {
-         						if ((divSw > 0.92) && (divSw < 1.08)) {
+         						if ((divSw > 0.90) && (divSw < 1.10)) {
          							loader.code[i][4] = 999;
          						} else {
          							loader.code[i][4] = 299;
@@ -1550,7 +1585,7 @@ public class ScreeningController {
                 		  (loader.code[i][16] != 529) && (loader.code[i][16] != 299) && (loader.code[i][16] != 552) && (loader.code[i][16] != 29) )) {
          				  loader.code[i][4] = 999;
          			} else {
-         				  loader.code[i][4] = 299;  
+         				  loader.code[i][4] = 599;  
          			}   
          			
          			// Test 2
@@ -1869,7 +1904,8 @@ public class ScreeningController {
          				loader.code[i][32] = 999;
          			} else {
          				loader.code[i][32] = 299;
-         			}
+         			}        			
+         			
          		} else {
          			if (loader.code[i][32] == 99) {
          				loader.code[i][32] = 599;
@@ -1881,10 +1917,18 @@ public class ScreeningController {
          		}
          	}
          			
-         	// End of the routine validation: Long Wave Radiation (W/m²) level 3
-                     
-         	//----------------------------------------------------------------------------------------------------------------------
+            // End of the routine validation: Long Wave Radiation (W/m²) level 3
+            // Sum count			 
+			 pb.setValue(cont);
+
+         	cont++;    	
+   	
+        	//----------------------------------------------------------------------------------------------------------------------
         } // End of loop level 3
+        dialog.dispose();
+		dialog.setVisible(false);
+		
     	return loader.code;
+	
     }
 }
