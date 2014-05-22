@@ -63,7 +63,7 @@ public class TesteValidation {
 			    infoData.setId("13");
 				infoData.setInputData(file.getAbsolutePath());
 				infoData.setOutputData(fileNames[i].substring(0, 7) + "ED.csv");
-				infoData.setOutputCode(fileNames[i].substring(0, 7) + "_DQC.csv");
+				infoData.setOutputCode(fileNames[i].substring(0, 7) + "ED_DQC.csv");
 				infoData.setOutputReport(fileNames[i].substring(0, 7) + ".csv");
 				infoData.setStation("Cachoeira Paulista");
 				infoData.setLatitudeOfStation(-22.6896);
