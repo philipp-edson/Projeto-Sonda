@@ -48,6 +48,17 @@ public class TesteValidation {
 				infoData.setLongitudeOfStation(-59.4197);
 				infoData.setMonth(fileNames[i].substring(5, 7));
 				infoData.setYear("20" + fileNames[i].substring(3, 5));
+			} else if (fileNames[i].substring(0, 3).equals("BJL")) {
+				infoData.setId("47");
+				infoData.setInputData(file.getAbsolutePath());
+				infoData.setOutputData(fileNames[i].substring(0, 7) + "ED.csv");
+				infoData.setOutputCode(fileNames[i].substring(0, 7) + "ED_DQC.csv");
+				infoData.setOutputReport(fileNames[i].substring(0, 7) + ".csv");
+				infoData.setStation("Bom Jesus da Lapa");
+				infoData.setLatitudeOfStation(-13.2335);
+				infoData.setLongitudeOfStation(-43.3760);
+				infoData.setMonth(fileNames[i].substring(5, 7));
+				infoData.setYear("20" + fileNames[i].substring(3, 5));
 			} else if (fileNames[i].substring(0, 3).equals("BRB")) {
 				infoData.setId("10");
 				infoData.setInputData(file.getAbsolutePath());
